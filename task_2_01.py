@@ -8,5 +8,4 @@ lastname = " Piantsiak"
 age = "28"
 sentence = "Hi, my name is " + firstname + lastname + ", " + "I am " + age + " years old."
 
-
 print(sentence)
