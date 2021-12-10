@@ -18,4 +18,3 @@ for numb in range(0, 100):
         coins_ending[numb] = "копеек"
 
 print("{} {} {} {}".format(rubles, rubles_ending[rubles], coins, coins_ending[coins]))
-
