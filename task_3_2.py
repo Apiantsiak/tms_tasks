@@ -6,7 +6,7 @@
 
 # Display "restaurant", "cafe", "house" depending on the number of guests (read the variable from the console)
 
-number_visitors = int(input("Enter count of visitors: "))
+number_visitors: int = int(input("Enter count of visitors: "))
 
 if number_visitors < 20:
     print("house")
