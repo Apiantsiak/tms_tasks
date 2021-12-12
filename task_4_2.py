@@ -9,7 +9,7 @@ for numb in numbs:
     if numb % 2 == 0 and 0 < numb:
         even_numbs_counter += 1
 
-print("Answer using a for loop:", even_numbs_counter)
+print("Result using a for loop:", even_numbs_counter)
 
 # Using a while loop
 
@@ -21,4 +21,4 @@ while counter < len(numbs):
         even_numbs_counter += 1
     counter += 1
 
-print("Answer using a while loop:", even_numbs_counter)
+print("Result using a while loop:", even_numbs_counter)
