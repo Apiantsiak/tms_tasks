@@ -14,7 +14,6 @@ print("Result using a for loop:", numbs)
 
 numbs: list = list(range(1, 6))
 counter: int = len(numbs) - 1
-print(counter)
 
 while counter:
     numbs.insert(0, numbs.pop())
