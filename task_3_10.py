@@ -6,8 +6,8 @@ rubles, coins = int(input("Enter value of rubles: ")), int(input("Enter value of
 rubles_ending: dict = {}
 coins_ending: dict = {}
 
-for numb in range(0, 100):
-    if numb == 1:
+for numb in range(0, 1001):
+    if numb % 10 == 1:
         rubles_ending[numb] = "рубль"
         coins_ending[numb] = "копейка"
     elif numb % 10 in range(2, 5):
