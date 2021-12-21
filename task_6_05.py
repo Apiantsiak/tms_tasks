@@ -14,7 +14,7 @@ def args_sum_func(args_ls: List[int]) -> int:
     return sum_args
 
 
-rand_ls = [randint(1, 10) for _ in range(randint(1, 20))]
+rand_ls: List[int] = [randint(1, 10) for _ in range(randint(1, 20))]
 
 print(f"The sum(args[i] * i) of {rand_ls}\n"
       f"Equals: {args_sum_func(rand_ls)}")
