@@ -7,9 +7,9 @@ from random import randint
 from typing import List
 
 
-def args_sum_func(args_ls: List[int]) -> int:
+def args_sum_func(*args) -> int:
     sum_args = 0
-    for pos, var in enumerate(args_ls):
+    for pos, var in enumerate(args):
         sum_args += var * pos
     return sum_args
 
@@ -17,4 +17,4 @@ def args_sum_func(args_ls: List[int]) -> int:
 rand_ls: List[int] = [randint(1, 10) for _ in range(randint(1, 20))]
 
 print(f"The sum(args[i] * i) of {rand_ls}\n"
-      f"Equals: {args_sum_func(rand_ls)}")
+      f"Equals: {args_sum_func(*rand_ls)}")
