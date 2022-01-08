@@ -8,8 +8,7 @@ from typing import List
 
 
 rand_name_ls: List[str] = ["".join([choice(ascii_lowercase) for _ in range(randint(3, 9))]).capitalize()
-                           for _ in range(randint(1, 10))
-                           ]
+                           for _ in range(randint(1, 10))]
 
 result_map: List[str] = list(map(lambda name: f"Hello, {name}", rand_name_ls))
 
