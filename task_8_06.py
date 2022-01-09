@@ -2,15 +2,15 @@
 
 
 from typing import List
-from time import time
+from datetime import datetime
 
 
 def execution_time_func(func):
 
     def decorator_func():
-        start = time()
+        start = datetime.now()
         func()
-        end = time()
+        end = datetime.now()
         ex_time = end - start
         print("Function execution time is {} sec.".format(ex_time))
 
