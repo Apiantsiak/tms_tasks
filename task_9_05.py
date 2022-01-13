@@ -24,7 +24,7 @@ with open("test_9_05(1).txt", "w") as even_line_file:
 with open("test_9_05(2).txt", "w") as odd_line_file:
     odd_line_file.writelines(data_file[::2])
 
-# Just try to delete file with help of Python
+# Just to try deleting file with help of Python
 
 # if Path.is_file(Path("test.txt")):
 #     del_files = input("Do you want to delete created files? y/n: ")
