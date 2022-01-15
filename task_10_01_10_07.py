@@ -51,14 +51,17 @@ class Dog:
     def change_name(self, name):
         self.name = name
 
-    def jump(self):
-        return print("Jump!")
+    @staticmethod
+    def jump():
+        print("Jump!")
 
-    def run(self):
-        return print("Run!")
+    @staticmethod
+    def run():
+        print("Run!")
 
-    def bark(self):
-        return print("Woof!")
+    @staticmethod
+    def bark():
+        print("Woof!")
 
 
 first_dog = Dog("1 meter", "8 kilos", "dog's name is first_dog", "age 2", "first_master")
