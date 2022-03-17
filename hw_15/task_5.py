@@ -11,21 +11,26 @@ from functools import wraps
 from task_4 import ABCCar
 
 
-logger_error: Dict[str, Any] = {}
-
-
 def speed_limit_deco(method):
 
     @wraps(method)
     def wrapper(self, *args, **kwargs):
         method(self, *args, **kwargs)
-        message_time = datetime.now()
-        logger_error[f'Over speed {message_time}'] = self.speed if self.speed > 90 else ...
+        speed = self.speed
+        if speed > 90:
+            error_time = f"{datetime.now().strftime('%x')} {datetime.now().strftime('%X')}"
+            error_mes = f"Over speed limit {error_time}: {self.brand} {self.model}"
+            self.logger_errors[error_mes] = speed
+            return speed
+        else:
+            return speed
 
     return wrapper
 
 
 class Car(ABCCar):
+
+    logger_errors: Dict[str, Any] = {}
 
     def __init__(self, brand: str, model: str, year_of_manufacture: str, speed: int or float = 0) -> None:
         self._brand = brand
@@ -34,15 +39,15 @@ class Car(ABCCar):
         self._speed = speed
 
     @property
-    def get_brand(self) -> str:
+    def brand(self) -> str:
         return self._brand
 
     @property
-    def get_model(self) -> str:
+    def model(self) -> str:
         return self._model
 
     @property
-    def get_year_of_manufacture(self) -> str:
+    def year_of_manufacture(self) -> str:
         return self._year_of_manufacture
 
     @property
@@ -55,7 +60,7 @@ class Car(ABCCar):
         self._speed = speed
 
     @property
-    def get_full_info(self) -> Dict[str, Any]:
+    def full_info(self) -> Dict[str, Any]:
         return {'brand': f'{self._brand}',
                 'model': f'{self._model}',
                 'year of manufacture': f'{self._year_of_manufacture}',
@@ -63,10 +68,12 @@ class Car(ABCCar):
 
 
 if __name__ == '__main__':
-    car = Car('Audi', 'RS2', '1993', speed=90)
-    car.speed = 120
-    print(car.speed)
-    print(logger_error)
-    car.speed = 130
-    print(logger_error)
-    print(car.speed)
+    car_audi = Car('Audi', 'RS2', '1993', speed=90)
+    car_vw = Car("VW", "Golf MK2", "1990", speed=80)
+
+    car_audi.speed = 100
+    car_vw.speed = 95
+    print(Car.logger_errors)
+    car_audi.speed = 85
+    car_vw.speed = 75
+    print(Car.logger_errors)
