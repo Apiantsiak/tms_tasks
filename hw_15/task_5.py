@@ -9,6 +9,7 @@ from datetime import datetime
 from typing import Dict, Any
 from functools import wraps
 from task_4 import ABCCar
+from task_6 import SpoilerMixin
 
 
 def speed_limit_deco(method):
@@ -28,7 +29,7 @@ def speed_limit_deco(method):
     return wrapper
 
 
-class Car(ABCCar):
+class Car(SpoilerMixin, ABCCar):
 
     logger_errors: Dict[str, Any] = {}
 
@@ -37,6 +38,7 @@ class Car(ABCCar):
         self._model = model
         self._year_of_manufacture = year_of_manufacture
         self._speed = speed
+        super().__init__()
 
     @property
     def brand(self) -> str:
@@ -57,7 +59,10 @@ class Car(ABCCar):
     @speed.setter
     @speed_limit_deco
     def speed(self, speed: int or float):
-        self._speed = speed
+        if self.spoiler:
+            self._speed = speed + 10
+        else:
+            self._speed = speed
 
     @property
     def full_info(self) -> Dict[str, Any]:
@@ -68,12 +73,6 @@ class Car(ABCCar):
 
 
 if __name__ == '__main__':
+
     car_audi = Car('Audi', 'RS2', '1993', speed=90)
     car_vw = Car("VW", "Golf MK2", "1990", speed=80)
-
-    car_audi.speed = 100
-    car_vw.speed = 95
-    print(Car.logger_errors)
-    car_audi.speed = 85
-    car_vw.speed = 75
-    print(Car.logger_errors)
