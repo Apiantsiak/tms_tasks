@@ -21,7 +21,6 @@ print(f"Using reduce: {res_reduce}")
 
 def test_positive():
     result = sum([numb for numb in lst if not numb % 3 and not numb % 7])
-    print(result)
     assert res_filter == result
     assert res_map == result
     assert res_reduce == result
