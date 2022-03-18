@@ -72,7 +72,21 @@ class Car(SpoilerMixin, ABCCar):
                 'current speed': f'{self._speed}'}
 
 
-if __name__ == '__main__':
-
+def test_save_mess_in_logs():
     car_audi = Car('Audi', 'RS2', '1993', speed=90)
-    car_vw = Car("VW", "Golf MK2", "1990", speed=80)
+    logger_scope = len(Car.logger_errors)
+    car_audi.speed = 120
+    assert len(Car.logger_errors) != logger_scope
+    car_audi.speed = 75
+    logger_scope = len(Car.logger_errors)
+    assert len(Car.logger_errors) == logger_scope
+
+
+def test_spoiler_increase_speed():
+    car_audi = Car('Audi', 'RS2', '1993', speed=90)
+    car_vw = Car('VW', 'Golf MK2', '1990', speed=90)
+    new_speed_value = 100
+    car_audi.install_spoiler()
+    car_audi.speed = new_speed_value
+    car_vw.speed = new_speed_value
+    assert car_vw.speed != car_audi.speed

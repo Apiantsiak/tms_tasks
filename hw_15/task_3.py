@@ -38,6 +38,10 @@ def sum_of_numbers(a: int, b: int) -> int:
     return a + b
 
 
-if __name__ == "__main__":
-    print(sum_of_numbers(randint(1, 100), randint(1, 100)))
-    print(CACHE)
+def test_save_in_cache():
+    rand_numb_a = randint(1, 100)
+    rand_numb_b = randint(1, 100)
+
+    sum_of_numbers(rand_numb_a, rand_numb_b)
+
+    assert (rand_numb_a, rand_numb_b) and sum_of_numbers(rand_numb_a, rand_numb_b) not in CACHE
