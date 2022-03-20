@@ -8,15 +8,13 @@ from typing import List
 
 lst: List[int] = list(range(1000))
 
+criteria_filter = ...
+criteria_map = ...
+criteria_reduce = ...
 
-res_filter = sum(list(filter(lambda x: x if (x % 3 == 0) and (x % 7 == 0) else 0, lst)))
-print(f"Using filter: {res_filter}")
-
-res_map = sum(list(map(lambda x: x if (x % 3 == 0) and (x % 7 == 0) else 0, lst)))
-print(f"Using map:{' ' * 4}{res_map}")
-
-res_reduce = reduce(lambda x, y: x + y, [numb for numb in lst if not numb % 3 and not numb % 7])
-print(f"Using reduce: {res_reduce}")
+res_filter = sum(filter(lambda x: x % 3 + x % 7 == 0, lst))
+res_map = sum(map(lambda x: x if not x % 3 + x % 7 else 0, lst))
+res_reduce = reduce(lambda x, y: x + y if not y % 3 + y % 7 else x, lst)
 
 
 def test_positive():

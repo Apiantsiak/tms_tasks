@@ -14,13 +14,15 @@ def get_random_number() -> None:
     :return: None
     """
 
-    text_for_user: Dict[str, str] = {'entry': 'Do you need a randon number from 1 to 100?',
-                                     'rule': 'If you need a number enter "Y" or enter "Q" to exit: ',
-                                     'next': 'Do you need next random number (Y/Q): ',
-                                     'result': f'This is your random number:',
-                                     'exit': 'Bye',
-                                     'error': 'Please enter "Y" or "Q": ',
-                                     }
+    text_for_user: Dict[str, str] = {
+        'entry': 'Do you need a randon number from 1 to 100?',
+        'rule': 'If you need a number enter "Y" or enter "Q" to exit: ',
+        'next': 'Do you need next random number (Y/Q): ',
+        'result': f'This is your random number:',
+        'exit': 'Bye',
+        'error': 'Please enter "Y" or "Q": ',
+    }
+
     print(text_for_user['entry'])
     question = 'rule'
 

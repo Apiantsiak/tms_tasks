@@ -18,18 +18,18 @@ def speed_limit_deco(method):
     def wrapper(self, *args, **kwargs):
         method(self, *args, **kwargs)
         speed = self.speed
-        if speed > 90:
+        warning_criteria = speed > 90
+
+        if warning_criteria:
             error_time = f"{datetime.now().strftime('%x')} {datetime.now().strftime('%X')}"
             error_mes = f"Over speed limit {error_time}: {self.brand} {self.model}"
             self.logger_errors[error_mes] = speed
-            return speed
-        else:
-            return speed
+        return speed
 
     return wrapper
 
 
-class Car(SpoilerMixin, ABCCar):
+class Car(ABCCar, SpoilerMixin):
 
     logger_errors: Dict[str, Any] = {}
 
@@ -66,10 +66,12 @@ class Car(SpoilerMixin, ABCCar):
 
     @property
     def full_info(self) -> Dict[str, Any]:
-        return {'brand': f'{self._brand}',
-                'model': f'{self._model}',
-                'year of manufacture': f'{self._year_of_manufacture}',
-                'current speed': f'{self._speed}'}
+        return {
+            'brand': f'{self._brand}',
+            'model': f'{self._model}',
+            'year of manufacture': f'{self._year_of_manufacture}',
+            'current speed': f'{self._speed}'
+        }
 
 
 def test_save_mess_in_logs():

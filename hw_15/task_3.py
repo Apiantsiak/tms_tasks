@@ -5,7 +5,7 @@
 # а возвращаться из хранилища (* изучить lru_cache)
 
 
-from functools import lru_cache, wraps
+from functools import wraps
 from typing import Dict
 from random import randint
 
