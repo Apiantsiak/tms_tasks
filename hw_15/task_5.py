@@ -38,7 +38,7 @@ class Car(ABCCar, SpoilerMixin):
         self._model = model
         self._year_of_manufacture = year_of_manufacture
         self._speed = speed
-        super().__init__()
+        SpoilerMixin.__init__(self)
 
     @property
     def brand(self) -> str:
@@ -59,8 +59,10 @@ class Car(ABCCar, SpoilerMixin):
     @speed.setter
     @speed_limit_deco
     def speed(self, speed: int or float):
-        if self.spoiler:
+        if self.spoiler.status:
             self._speed = speed + 10
+        elif self.spoiler.status:
+            self._speed = speed
         else:
             self._speed = speed
 
@@ -88,7 +90,7 @@ def test_spoiler_increase_speed():
     car_audi = Car('Audi', 'RS2', '1993', speed=90)
     car_vw = Car('VW', 'Golf MK2', '1990', speed=90)
     new_speed_value = 100
-    car_audi.install_spoiler()
+    car_audi.activate_spoiler()
     car_audi.speed = new_speed_value
     car_vw.speed = new_speed_value
     assert car_vw.speed != car_audi.speed

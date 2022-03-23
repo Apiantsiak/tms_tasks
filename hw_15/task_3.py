@@ -6,23 +6,27 @@
 
 
 from functools import wraps
-from typing import Dict
+from typing import Dict, Tuple
 from random import randint
 
 
-CACHE: Dict[tuple, int] = {}
+CACHE: Dict[Tuple[str, Tuple[int, int]], int] = {}
 
 
 def save_in_cache_deco(func):
 
     @wraps(func)
     def wrapper(a: int, b: int):
+        func_name = func.__name__
+        func_attr = (a, b)
+        key_for_cache = (func_name, func_attr)
+        func_result = func(a, b)
 
-        if (a, b) in CACHE:
-            return CACHE[(a, b)]
+        if key_for_cache in CACHE:
+            return CACHE[key_for_cache]
         else:
-            CACHE[(a, b)] = func(a, b)
-            return CACHE[(a, b)]
+            CACHE[key_for_cache] = func_result
+            return CACHE[key_for_cache]
 
     return wrapper
 
@@ -39,9 +43,8 @@ def sum_of_numbers(a: int, b: int) -> int:
 
 
 def test_save_in_cache():
-    rand_numb_a = randint(1, 100)
-    rand_numb_b = randint(1, 100)
-
-    sum_of_numbers(rand_numb_a, rand_numb_b)
-
-    assert (rand_numb_a, rand_numb_b) and sum_of_numbers(rand_numb_a, rand_numb_b) not in CACHE
+    rand_a = randint(1, 100)
+    rand_b = randint(1, 100)
+    name_of_cached_func = sum_of_numbers.__name__
+    sum_of_numbers(rand_a, rand_b)
+    assert (name_of_cached_func, (rand_a, rand_b)) in CACHE

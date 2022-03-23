@@ -4,10 +4,19 @@
 # Spoiler должен влиять на Car.speed , увеличивая ее на значение N.
 
 
+class Spoiler:
+
+    def __init__(self):
+        self.status = None
+
+
 class SpoilerMixin:
 
     def __init__(self):
-        self.spoiler = False
+        self.spoiler = Spoiler()
 
-    def install_spoiler(self):
-        self.spoiler = True
+    def activate_spoiler(self):
+        self.spoiler.status = True
+
+    def deactivate_spoiler(self):
+        self.spoiler.status = False
