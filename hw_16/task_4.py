@@ -11,29 +11,20 @@ from task_3 import Rectangle, Triangle, Circle
 
 class ContainerShapeTypes:
 
-    _possible_shape_type = ['Rectangle', 'Triangle', 'Circle']
-    _inst_storage = []
+    def __init__(self):
+        self._inst_storage = []
 
-    def __init__(self, containerized_cls):
-        if containerized_cls.__name__ not in self._possible_shape_type:
-            raise ValueError('Wrong class type')
+    def add_inst_storage(self, shape_cls_inst):
+        self._inst_storage.append(shape_cls_inst)
 
-        self.inst = containerized_cls()
-        self._add_inst_storage(self.inst)
+    @property
+    def inst_storage(self):
+        return self._inst_storage
 
-    @classmethod
-    def _add_inst_storage(cls, cls_inst):
-        cls._inst_storage.append(cls_inst)
-
-    @classmethod
-    def get_storage(cls):
-        return cls._inst_storage
-
-    @classmethod
-    def general_square(cls):
-        if cls._inst_storage:
+    def general_square(self):
+        if self._inst_storage:
             square_sum = 0
-            for inst in cls._inst_storage:
+            for inst in self._inst_storage:
                 cls_name = inst.__class__.__name__
                 if cls_name == 'Rectangle':
                     square_sum += inst.rectangle_square()
@@ -44,16 +35,26 @@ class ContainerShapeTypes:
             return square_sum
 
 
-rectangle_1 = ContainerShapeTypes(Rectangle)
-triangle_1 = ContainerShapeTypes(Triangle)
-circle_1 = ContainerShapeTypes(Circle)
+rectangles = ContainerShapeTypes()
+triangles = ContainerShapeTypes()
+circles = ContainerShapeTypes()
+
+rectangle_1 = Rectangle()
+triangle_1 = Triangle()
+circle_1 = Circle()
+
+rectangles.add_inst_storage(rectangle_1)
+triangles.add_inst_storage(triangle_1)
+circles.add_inst_storage(circle_1)
 
 
 def test_add_to_storage():
-    assert rectangle_1.inst and triangle_1.inst and circle_1.inst in ContainerShapeTypes.get_storage()
+    assert rectangle_1 in rectangles.inst_storage
+    assert triangle_1 in triangles.inst_storage
+    assert circle_1 in circles.inst_storage
 
 
 def test_correct_general_square_val():
-    a, b, c, = rectangle_1.inst.rectangle_square(), triangle_1.inst.triangle_square(), circle_1.inst.circle_square()
-    square_sum_result = a + b + c
-    assert square_sum_result == ContainerShapeTypes.general_square()
+    square_sum_result = rectangle_1.rectangle_square() + triangle_1.triangle_square() + circle_1.circle_square()
+    cls_square_result = rectangles.general_square() + triangles.general_square() + circles.general_square()
+    assert square_sum_result == cls_square_result
