@@ -10,9 +10,11 @@ from queries import QUERIES
 CONNECTION = DbConnector('hw_19DB.sqlite')
 
 
-def create_tables(query: str):
+def create_tables():
     with CONNECTION as cursor:
-        cursor.execute(query)
+        for key, value in QUERIES['DDL'].items():
+            cursor.execute(value)
+            print(f'Table {key} created')
 
 
 def insert_into_tables(table: str, rows: str, values: tuple or str):
