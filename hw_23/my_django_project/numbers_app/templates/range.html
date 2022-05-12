@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    <ul>
+        {% for numb in rand_numb_range %}
+            {% if forloop.counter|divisibleby:"10" %}
+                <li><p style="color: #1d881d">{{ numb }}</p></li>
+            {% else %}
+                <li><p>{{ numb }}</p></li>
+            {% endif %}
+        {% endfor%}
+    </ul>
+{% endblock %}
