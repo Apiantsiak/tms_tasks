@@ -1,0 +1,29 @@
+{% load static %}
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>AP Blog</title>
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lobster&subset=latin,cyrillic" type="text/css">
+        <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+        <link rel="shortcut icon" type="image/png" href="{% static 'css/favicon.ico' %}">
+
+    </head>
+        <body>
+            <div class="page-header">
+                {% if user.is_authenticated %}
+                    <h2><a href="{% url 'post_new' %}" class="top-menu">Add new post</a></h2>
+                {% endif %}
+                <h1><a href="{% url 'post_list' %}">AvP Blog</a> </h1>
+            </div>
+            <div class="content container">
+                <div class="row">
+                    <div class="col-md-8">
+                        {% block content %}
+                        {% endblock %}
+                    </div>
+                </div>
+            </div>
+        </body>
+</html>
