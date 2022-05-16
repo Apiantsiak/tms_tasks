@@ -13,7 +13,10 @@
         <body>
             <div class="page-header">
                 {% if user.is_authenticated %}
-                    <h2><a href="{% url 'post_new' %}" class="top-menu">Add new post</a></h2>
+                    <h2><a href="{% url 'post_new' %}" class="top-menu">
+                        <span class="glyphicon glyphicon-plus"></span></a></h2>
+                    <a href="{% url 'post_draft_list' %}" class="top-menu">
+                        <span class="glyphicon glyphicon-edit"></span></a>
                 {% endif %}
                 <h1><a href="{% url 'post_list' %}">AvP Blog</a> </h1>
             </div>
