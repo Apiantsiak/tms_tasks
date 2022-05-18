@@ -1,6 +1,7 @@
 import datetime as dt
 from random import randint
-from django.views.generic.base import TemplateView
+
+from django.views.generic import TemplateView, ListView
 
 from .models import HistoryLog
 
@@ -42,12 +43,7 @@ class RangeView(LogHistoryMixin, TemplateView):
         return context
 
 
-class HistoryView(TemplateView):
-    template_name = 'history.html'
+class HistoryView(ListView):
+    paginate_by = 10
     model = HistoryLog
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["history_log"] = HistoryLog.objects.all()
-        context['title'] = 'numbers/history'
-        return context
+    template_name = 'history.html'
