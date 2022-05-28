@@ -5,6 +5,7 @@
 
 
 from typing import Dict, Any
+from random import randint
 
 
 def rectangle_square(self):
@@ -29,20 +30,20 @@ def circle_square(self):
 
 shape_type: Dict[str, Dict[str, Any]] = {
     'Rectangle': {
-        'side_a': 5,
-        'side_b': 4,
-        rectangle_square.__name__: rectangle_square,
+        'side_a': randint(1, 5),
+        'side_b': randint(1, 5),
+        'square': rectangle_square,
 
     },
     'Triangle': {
-        'side_a': 4,
-        'side_b': 4,
-        'side_c': 4,
-        triangle_square.__name__: triangle_square,
+        'side_a': randint(5, 10),
+        'side_b': randint(5, 10),
+        'side_c': randint(5, 10),
+        'square': triangle_square,
     },
     'Circle': {
-        'radius': 1,
-        circle_square.__name__: circle_square,
+        'radius': randint(1, 5),
+        'square': circle_square,
     },
 }
 
@@ -67,6 +68,6 @@ def test_correct_creation_cls():
     assert isinstance(rectangle, Rectangle)
     assert isinstance(triangle, Triangle)
     assert isinstance(circle, Circle)
-    assert 'rectangle_square' in Rectangle.__dict__
-    assert 'triangle_square' in Triangle.__dict__
-    assert 'circle_square' in Circle.__dict__
+    assert 'square' in Rectangle.__dict__
+    assert 'square' in Triangle.__dict__
+    assert 'square' in Circle.__dict__
