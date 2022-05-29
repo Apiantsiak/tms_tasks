@@ -3,7 +3,15 @@ from random import randint
 
 from django.views.generic import TemplateView, ListView
 
+from rest_framework.generics import ListCreateAPIView
+
+from .serializers import HistoryLogSerializer
 from .models import HistoryLog
+
+
+class HistoryApiView(ListCreateAPIView):
+    serializer_class = HistoryLogSerializer
+    queryset = HistoryLog.objects.all()
 
 
 class LogHistoryMixin:
