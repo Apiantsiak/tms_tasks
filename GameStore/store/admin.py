@@ -10,6 +10,7 @@ class ProductAdmin(admin.ModelAdmin):
         'stock',
         'category',
         'modified_date',
+        'is_available',
     )
     prepopulated_fields = {'slug': ('product_name', )}
 

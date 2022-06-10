@@ -1,7 +1,11 @@
 from django.shortcuts import render
 
-# Create your views here.
+from store.models import Product
 
 
 def homepage(request):
-    return render(request, 'homepage/homepage.html')
+    products = Product.objects.all().filter(is_available=True)
+    context = {
+        'products': products,
+    }
+    return render(request, 'homepage/homepage.html', context)
