@@ -144,3 +144,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MESSAGE_TAGS = {
     messages.ERROR: 'danger',
 }
+
+
+# SMTP configuration
+
+EMAIL_HOST = 'smtp.mailtrap.io'
+EMAIL_HOST_USER = '42714868241085'
+EMAIL_HOST_PASSWORD = 'e7f5bcf3befcef'
+EMAIL_PORT = '2525'
