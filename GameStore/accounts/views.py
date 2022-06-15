@@ -1,3 +1,5 @@
+import requests.utils
+
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib import auth
@@ -14,6 +16,8 @@ from django.core.mail import EmailMessage
 
 from .models import Account
 from .forms import RegistrationForm
+from carts.models import Cart, CartItem
+from carts.views import get_cart_id
 
 
 def register(request):
@@ -68,9 +72,49 @@ def login(request):
         user = auth.authenticate(email=email, password=password)
 
         if user is not None:
+            try:
+                cart = Cart.objects.get(cart_id=get_cart_id(request))
+                is_cart_item_exists = CartItem.objects.filter(cart=cart).exists()
+                if is_cart_item_exists:
+                    cart_item = CartItem.objects.filter(cart=cart)
+
+                    product_variation = []
+                    for item in cart_item:
+                        variation = item.variations.all()
+                        product_variation.append(list(variation))
+                    cart_item = CartItem.objects.filter(user=user)
+                    ex_var_list = []
+                    id_ls = []
+                    for item in cart_item:
+                        existing_variation = item.variations.all()
+                        ex_var_list.append(list(existing_variation))
+                        id_ls.append(item.id)
+                    for pr in product_variation:
+                        if pr in ex_var_list:
+                            index = ex_var_list.index(pr)
+                            item_id = id_ls[index]
+                            item = CartItem.objects.get(id=item_id)
+                            item.quantity += 1
+                            item.user = user
+                            item.save()
+                        else:
+                            cart_item = CartItem.objects.filter(cart=cart)
+                            for item in cart_item:
+                                item.user = user
+                                item.save()
+            except Exception:
+                pass
             auth.login(request, user)
-            # messages.success(request, 'You are now logged in.')
-            return redirect('dashboard')
+            messages.success(request, 'You are now logged in.')
+            url = request.META.get('HTTP_REFERER')
+            try:
+                query = requests.utils.urlparse(url).query
+                params = dict(x.split('=') for x in query.split('&'))
+                if 'next' in params:
+                    next_page = params['next']
+                    return redirect(next_page)
+            except:
+                return redirect('dashboard')
         else:
             messages.error(request, 'Invalid login credentials.')
             return redirect('login')
