@@ -3,15 +3,15 @@
 
 {% block content %}
 <!-- ========================= SECTION PAGETOP ========================= -->
+{% if 'search' in request.path %}
 <section class="section-pagetop bg">
-<div class="container">
-	{% if 'search' in request.path %}
-		<h3 class="title-page">Search Results:</h3>
-	{% else %}
-		<h3 class="title-page">Our Store</h3>
-	{% endif %}
+<div class="container" style="max-height: 100px">
+
+		<h5 class="title-page">Search Results:</h5>
+
 </div> <!-- container //  -->
 </section>
+{% endif %}
 <!-- ========================= SECTION INTRO END// ========================= -->
 
 <!-- ========================= SECTION CONTENT ========================= -->
