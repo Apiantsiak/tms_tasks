@@ -1,0 +1,90 @@
+{% load static %}
+<header class="section-header">
+<nav class="navbar p-md-0 navbar-expand-sm navbar-light border-bottom">
+<div class="container">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTop4" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarTop4">
+    <ul class="navbar-nav mr-auto">
+    	<li class="nav-item dropdown">
+		 	<a href="#" class="nav-link"> English </a>
+
+		</li>
+		<li class="nav-item dropdown">
+			<a href="#" class="nav-link"> USD </a>
+		</li>
+    </ul>
+    <ul class="navbar-nav">
+		<li><a href="#" class="nav-link"> <i class="fa fa-envelope"></i> Email </a></li>
+		<li><a href="#" class="nav-link"> <i class="fa fa-phone"></i> Call us </a></li>
+	</ul> <!-- list-inline //  -->
+  </div> <!-- navbar-collapse .// -->
+</div> <!-- container //  -->
+</nav>
+
+<section class="header-main border-bottom">
+	<div class="container">
+<div class="row align-items-center">
+	<div class="col-lg-2 col-md-3 col-6">
+		<a href="{% url 'homepage' %}" class="brand-wrap">
+			<img class="logo" src="data:image/png;base64,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" style="max-height: 120px; max-width: 150px">
+		</a> <!-- brand-wrap.// -->
+	</div>
+	<div class="col-lg col-sm col-md col-6 flex-grow-0">
+		<div class="category-wrap dropdown d-inline-block float-right">
+			<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+				<i class="fa fa-bars"></i> All category
+			</button>
+			<div class="dropdown-menu">
+				<a class="dropdown-item" href="{% url 'store' %}">All Products</a>
+				{% for category in links %}
+				<a class="dropdown-item" href="{{ category.get_url }}">{{ category.category_name }}</a>
+				{% endfor %}
+			</div>
+		</div>  <!-- category-wrap.// -->
+	</div> <!-- col.// -->
+	<a href="{% url 'store' %}" class="btn btn-outline-primary">Store</a>
+	<div class="col-lg  col-md-6 col-sm-12 col">
+
+		<form action="{% url 'search' %}" class="search" method="GET">
+			<div class="input-group w-100">
+			    <input type="text" class="form-control" style="width:60%;" placeholder="Search" name="keyword">
+
+			    <div class="input-group-append">
+			      <button class="btn btn-primary" type="submit">
+			        <i class="fa fa-search"></i>
+			      </button>
+			    </div>
+		    </div>
+		</form> <!-- search-wrap .end// -->
+	</div> <!-- col.// -->
+	<div class="col-lg-3 col-sm-6 col-8 order-2 order-lg-3">
+				<div class="d-flex justify-content-end mb-3 mb-lg-0">
+					{% if user.id is None %}
+					<div class="widget-header">
+						<small class="title text-muted">Welcome guest!</small>
+						<div>
+							<a href="{% url 'login' %}">Sign in</a> <span class="dark-transp"> | </span>
+							<a href="{% url 'register' %}">Register</a>
+						</div>
+					</div>
+					{% else %}
+					<div class="widget-header">
+						<small class="title text-muted">Welcome {{ user.first_name }}!</small>
+						<div>
+							<a href="{% url 'dashboard' %}">Dashboard</a> <span class="dark-transp"> | </span>
+							<a href="{% url 'logout' %}">Logout</a>
+						</div>
+					</div>
+					{% endif %}
+					<a href="{% url 'cart' %}" class="widget-header pl-3 ml-3">
+						<div class="icon icon-sm rounded-circle border"><i class="fa fa-shopping-cart"></i></div>
+						<span class="badge badge-pill badge-danger notify">{{ cart_count }}</span>
+					</a>
+				</div> <!-- widgets-wrap.// -->
+			</div> <!-- col.// -->
+</div> <!-- row.// -->
+	</div> <!-- container.// -->
+</section> <!-- header-main .// -->
+</header> <!-- section-header.// -->
