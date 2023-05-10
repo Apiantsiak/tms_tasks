@@ -2,14 +2,18 @@ version: "3.7"
 
 services:
   pg_learn:
-    image: postgres:9.6
-    container_name: test_DB
+    image: postgres:latest
+    container_name: test
     hostname: test
     ports:
       - "8432:5432"
     expose:
       - 8432
     environment:
-      POSTGRES_USER: 'avp'
-      POSTGRES_PASSWORD: 'avp'
-      POSTGRES_DB: 'test_DB'
+      POSTGRES_USER: 'user'
+      POSTGRES_PASSWORD: 'user_pass'
+      POSTGRES_DB: 'test_bd'
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+volumes:
+  postgres_data:
